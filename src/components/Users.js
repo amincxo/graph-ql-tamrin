@@ -1,18 +1,8 @@
 import React from 'react'
 
-import { gql , useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import { GET_USERS } from '../graphql/queries';
 
-const GET_USERS = gql`
-query {
-    users {
-        data {
-            name
-            email
-            phone
-        }
-    }
-}
-`
 
 function Users() {
     const {loading , data , error } = useQuery(GET_USERS);
@@ -24,7 +14,7 @@ function Users() {
   return (
     <div>
         {data.users.data.map((user) => (
-        <div  key={user.name} style={{background:"red" , margin:"15px"}} > 
+        <div  key={user.id} style={{background:"red" , margin:"15px"}} > 
           <h1> {user.name} </h1>  
           <p> {user.email} </p>  
           <p> {user.phone} </p>  

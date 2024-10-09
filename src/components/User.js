@@ -1,18 +1,10 @@
 import React , {useState} from 'react'
 
 
-import { gql , useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { GET_USER } from '../graphql/queries';
 
-const GET_USER = gql`
-    query getUser($id: ID!) {
-        user(id:$id){
-            id
-            name
-            email
-            phone
-        }
-    }
-`
+
 
 function User() {
     const [id , setId] = useState(2);
@@ -31,6 +23,16 @@ function User() {
 
     <div>
         <input value={id} onChange={changeHandler} placeholder='enter id' />
+        {
+            data && (
+                <>
+                <h1> {data.user.name} </h1>  
+                <p> {data.user.email} </p>  
+                <p> {data.user.phone} </p> 
+                </> 
+            )
+        }
+        
     </div>
   )
 }
